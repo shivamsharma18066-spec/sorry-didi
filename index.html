@@ -163,6 +163,15 @@
             font-weight: 300;
         }
 
+        /* GIF styling inside messages */
+        .msg-gif {
+            width: 110px;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
         /* Envelope Section */
         .envelope-section {
             width: 100%;
@@ -232,6 +241,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(244, 114, 182, 0.08);
             position: relative;
             transform: rotate(-0.5deg);
+            text-align: center;
         }
 
         .paper-card::before {
@@ -250,18 +260,29 @@
             font-size: 16px;
         }
 
+        .note-gif-top {
+            width: 110px;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .note-gif-bottom {
+            width: 120px;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
         .handwritten-text {
             font-family: 'Caveat', cursive;
             font-size: 20px;
             line-height: 1.5;
             color: #3b1137;
+            text-align: left;
             white-space: pre-line;
-        }
-
-        .card-illustration {
-            text-align: center;
-            font-size: 30px;
-            margin-top: 15px;
         }
 
         /* Footer */
@@ -311,6 +332,7 @@
                 <div class="msg-content">
                     <div class="msg-title">I messed up, bestuuu 🥺</div>
                     <div class="msg-text">I really didn't mean to make u feel ignored. I should've just asked u what was wrong instead of assuming.</div>
+                    <img src="https://media.tenor.com/vdrZBTXV3HzAAAAC/tenor.gif" alt="GIF 1" class="msg-gif">
                 </div>
             </div>
 
@@ -320,6 +342,7 @@
                 <div class="msg-content">
                     <div class="msg-title">I never wanted this 🥹</div>
                     <div class="msg-text">I thought u needed some space, so I gave it to u… but I realise now that I should've checked on u instead.</div>
+                    <img src="https://media.tenor.com/dfubgEbNZU4AAAAC/tenor.gif" alt="GIF 2" class="msg-gif">
                 </div>
             </div>
 
@@ -329,6 +352,7 @@
                 <div class="msg-content">
                     <div class="msg-title">Please forgive me 🫶🏻</div>
                     <div class="msg-text">U mean way too much to me, twin. I never want u to feel unimportant because of me.</div>
+                    <img src="https://media.tenor.com/bSna0DJ80yvAAAAC/tenor.gif" alt="GIF 3" class="msg-gif">
                 </div>
             </div>
 
@@ -352,6 +376,9 @@
         <!-- Final Handwritten Paper Note -->
         <div class="final-note-container" id="finalNote">
             <div class="paper-card">
+                <!-- Top Center GIF -->
+                <img src="https://media.tenor.com/9sreAAAAC/tenor.gif" alt="Note Top GIF" class="note-gif-top">
+                
                 <div class="handwritten-text">Good morning, bestie ✌🏻☀️
 
 Before anything else, I want to say I'm really sorry, my bestuuu. 🥺 I genuinely never wanted to upset u or make u feel like I was ignoring u.
@@ -363,7 +390,9 @@ I thought maybe u needed some time n space, so instead of bothering u, I decided
 U mean way too much to me, twin 🫶🏻💞
 
 The last thing I ever want is for u to feel ignored or unimportant because of me 🥹</div>
-                <div class="card-illustration">🧸✨</div>
+
+                <!-- Bottom Center GIF -->
+                <img src="https://media.tenor.com/dJeguxN8K9vAAAAC/tenor.gif" alt="Note Bottom GIF" class="note-gif-bottom">
             </div>
         </div>
 
