@@ -2,174 +2,454 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bestuuu 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Bestie 💗</title>
+    <!-- Google Fonts for Clean & Handwritten Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: linear-gradient(135deg, #ffe6ea 0%, #ffc0cb 100%);
+            background: linear-gradient(180deg, #170014 0%, #280325 50%, #3a0635 100%);
             min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background particles */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Mobile Container (9:16 layout focus) */
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 24px 20px 40px 20px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 380px;
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: #170014;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #fbcfe8;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Interactive Message Cards */
+        .messages-list {
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 30px;
         }
 
-        .tag {
-            background-color: #ffe4e6;
-            color: #e11d48;
-            padding: 6px 16px;
+        .msg-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 200, 225, 0.2);
             border-radius: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .heart-icon {
-            font-size: 80px;
-            margin: 15px 0;
-            display: block;
+            padding: 18px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            animation: pulse 1.5s infinite;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .tap-text {
-            color: #be123c;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-
-        .content-section {
-            display: none;
-        }
-
-        .content-section h1 {
-            color: #e11d48;
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .content-section p {
-            color: #4b5563;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .btn-container {
+        .msg-card.closed {
+            height: 65px;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
+        }
+
+        .msg-card.closed .heart-icon {
+            font-size: 22px;
+            color: #f472b6;
+            animation: pulse 2s infinite;
+        }
+
+        .msg-card.open {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(244, 114, 182, 0.5);
+            transform: scale(1.02);
+        }
+
+        .msg-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .msg-card.open .msg-content {
+            display: block;
+            opacity: 1;
+        }
+
+        .msg-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fbcfe8;
+            margin-bottom: 8px;
+        }
+
+        .msg-text {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #f3e8ff;
+            font-weight: 300;
+        }
+
+        /* Envelope Section */
+        .envelope-section {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .envelope-section.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .envelope-wrapper {
+            width: 180px;
+            height: 120px;
             position: relative;
-            min-height: 50px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+
+        .envelope-wrapper:active {
+            transform: scale(0.95);
+        }
+
+        .envelope-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+        }
+
+        .tap-prompt {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            color: #fbcfe8;
+            font-weight: 600;
+            animation: bounce 1.8s infinite;
+        }
+
+        /* Final Note Container */
+        .final-note-container {
+            display: none;
+            width: 100%;
+            margin-top: 10px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .final-note-container.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .paper-card {
+            background: #fffdf9;
+            color: #2d182b;
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(244, 114, 182, 0.08);
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .paper-card::before {
+            content: '✨';
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 18px;
+        }
+
+        .paper-card::after {
+            content: '💗';
+            position: absolute;
+            bottom: 12px;
+            left: 15px;
+            font-size: 16px;
+        }
+
+        .handwritten-text {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            line-height: 1.5;
+            color: #3b1137;
+            white-space: pre-line;
+        }
+
+        .card-illustration {
+            text-align: center;
+            font-size: 30px;
             margin-top: 15px;
         }
 
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+        /* Footer */
+        .footer {
+            margin-top: 35px;
+            font-size: 12px;
+            color: #fbcfe8;
+            opacity: 0.8;
+            text-align: center;
+            font-weight: 300;
         }
 
-        .yes-btn {
-            background-color: #22c55e;
-            color: white;
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
 
-        .no-btn {
-            background-color: #ef4444;
-            color: white;
-            position: relative;
-        }
-
-        .final-screen {
-            display: none;
-        }
-
-        .final-screen h2 {
-            color: #22c55e;
-            font-size: 22px;
-            margin-bottom: 10px;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <!-- Cover View -->
-        <div id="coverSection" onclick="openEnvelope()">
-            <div class="tag">Bestuuu</div>
-            <div class="heart-icon">💖</div>
-            <div class="tap-text">Tap anywhere to open 💖</div>
+    <!-- Floating Background Particles Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="app-container">
+        
+        <!-- Header -->
+        <div class="header">
+            <button class="back-btn" onclick="resetPage()">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </button>
+            <h1 class="title">Your Sorry Messages</h1>
+            <p class="subtitle">Tap each one to reveal</p>
         </div>
 
-        <!-- Apology View -->
-        <div id="apologySection" class="content-section">
-            <div class="tag">I'm Sorry! 🥺</div>
-            <h1>Please Forgive Me?</h1>
-            <p>I really value our friendship and I'm truly sorry for messing up. Can we make up?</p>
-            <div class="btn-container">
-                <button class="yes-btn" onclick="forgive()">Yes ❤️</button>
-                <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No 💔</button>
+        <!-- 3 Interactive Message Buttons -->
+        <div class="messages-list">
+            
+            <!-- Message 1 -->
+            <div class="msg-card closed" id="card1" onclick="openCard(1)">
+                <div class="heart-icon">♡</div>
+                <div class="msg-content">
+                    <div class="msg-title">I messed up, bestuuu 🥺</div>
+                    <div class="msg-text">I really didn't mean to make u feel ignored. I should've just asked u what was wrong instead of assuming.</div>
+                </div>
+            </div>
+
+            <!-- Message 2 -->
+            <div class="msg-card closed" id="card2" onclick="openCard(2)">
+                <div class="heart-icon">♡</div>
+                <div class="msg-content">
+                    <div class="msg-title">I never wanted this 🥹</div>
+                    <div class="msg-text">I thought u needed some space, so I gave it to u… but I realise now that I should've checked on u instead.</div>
+                </div>
+            </div>
+
+            <!-- Message 3 -->
+            <div class="msg-card closed" id="card3" onclick="openCard(3)">
+                <div class="heart-icon">♡</div>
+                <div class="msg-content">
+                    <div class="msg-title">Please forgive me 🫶🏻</div>
+                    <div class="msg-text">U mean way too much to me, twin. I never want u to feel unimportant because of me.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Envelope Section (Appears after 3 cards opened) -->
+        <div class="envelope-section" id="envelopeSection">
+            <div class="envelope-wrapper" onclick="openEnvelope()">
+                <svg class="envelope-svg" viewBox="0 0 200 130">
+                    <rect x="10" y="20" width="180" height="100" rx="10" fill="#f472b6" />
+                    <path d="M 10 20 L 100 80 L 190 20 Z" fill="#fbcfe8" />
+                    <path d="M 10 120 L 80 65 L 10 20 Z" fill="#f43f5e" opacity="0.15" />
+                    <path d="M 190 120 L 120 65 L 190 20 Z" fill="#f43f5e" opacity="0.15" />
+                    <circle cx="100" cy="70" r="14" fill="#ffffff"/>
+                    <text x="100" y="74" font-size="12" text-anchor="middle" fill="#e11d48">💌</text>
+                </svg>
+            </div>
+            <div class="tap-prompt">CLICK TO OPEN 💌</div>
+        </div>
+
+        <!-- Final Handwritten Paper Note -->
+        <div class="final-note-container" id="finalNote">
+            <div class="paper-card">
+                <div class="handwritten-text">Good morning, bestie ✌🏻☀️
+
+Before anything else, I want to say I'm really sorry, my bestuuu. 🥺 I genuinely never wanted to upset u or make u feel like I was ignoring u.
+
+Yesterday when u were replying late n ur replies felt off n dry, I honestly thought u were feeling sad n weren't in the mood to talk.
+
+I thought maybe u needed some time n space, so instead of bothering u, I decided to give u that space. I now realise that I should've simply asked u if u were okay instead of assuming it, n I genuinely apologise for it.
+
+U mean way too much to me, twin 🫶🏻💞
+
+The last thing I ever want is for u to feel ignored or unimportant because of me 🥹</div>
+                <div class="card-illustration">🧸✨</div>
             </div>
         </div>
 
-        <!-- Success View -->
-        <div id="successSection" class="final-screen">
-            <div class="heart-icon">🎉</div>
-            <h2>Yay! Thank You!</h2>
-            <p>Best friends forever! 🤗✨</p>
+        <!-- Footer -->
+        <div class="footer">
+            Made with love for my bestie 💗
         </div>
+
     </div>
 
+    <!-- Interactive Script -->
     <script>
+        const openedCards = new Set();
+
+        function openCard(cardNumber) {
+            const card = document.getElementById(`card${cardNumber}`);
+            if (card.classList.contains('closed')) {
+                card.classList.remove('closed');
+                card.classList.add('open');
+                openedCards.add(cardNumber);
+            }
+
+            // Check if all 3 cards are revealed
+            if (openedCards.size === 3) {
+                setTimeout(() => {
+                    const envelopeSec = document.getElementById('envelopeSection');
+                    envelopeSec.classList.add('show');
+                    envelopeSec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 500);
+            }
+        }
+
         function openEnvelope() {
-            document.getElementById('coverSection').style.display = 'none';
-            document.getElementById('apologySection').style.display = 'block';
+            const envelopeSec = document.getElementById('envelopeSection');
+            const finalNote = document.getElementById('finalNote');
+
+            envelopeSec.style.opacity = '0';
+            setTimeout(() => {
+                envelopeSec.style.display = 'none';
+                finalNote.classList.add('show');
+                finalNote.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 400);
         }
 
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40);
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = Math.max(20, x) + 'px';
-            noBtn.style.top = Math.max(20, y) + 'px';
+        function resetPage() {
+            location.reload();
         }
 
-        function forgive() {
-            document.getElementById('apologySection').style.display = 'none';
-            document.getElementById('successSection').style.display = 'block';
+        /* Particles System (Floating Stars & Soft Lights) */
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = Array.from({ length: 45 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.8 + 0.5,
+            color: ['#ffffff', '#fbcfe8', '#f472b6', '#e879f9'][Math.floor(Math.random() * 4)],
+            speedY: Math.random() * 0.4 + 0.1,
+            opacity: Math.random() * 0.7 + 0.3
+        }));
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.opacity;
+                ctx.fill();
+
+                p.y -= p.speedY;
+                if (p.y < 0) {
+                    p.y = canvas.height;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
 </html>
