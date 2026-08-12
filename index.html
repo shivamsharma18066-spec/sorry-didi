@@ -2,585 +2,174 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Bestuuu 💖</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestuuu 💖</title>
     <style>
-        /* ==========================================================================
-           1. CORE & GLOBAL STYLES
-           ========================================================================== */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-family: 'Nunito', sans-serif;
-            user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #ffeef4 0%, #ffd3e2 50%, #fbc2eb 100%);
+            background: linear-gradient(135deg, #ffe6ea 0%, #ffc0cb 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
+            padding: 20px;
         }
 
-        /* Floating Hearts Particles */
-        #particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            color: rgba(255, 120, 168, 0.45);
-            font-size: 1.2rem;
-            animation: floatUp 10s infinite linear;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) scale(0.5) rotate(0deg);
-                opacity: 0;
-            }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
-            100% {
-                transform: translateY(-10vh) scale(1.2) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Mobile App Frame Container (9:16 aspect ratio feel) */
-        .app-frame {
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            max-height: 820px;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-
-        .view-step {
-            width: 100%;
-            height: 100%;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 24px;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .view-step.active {
-            display: flex;
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* ==========================================================================
-           STEP 1: HEART QR REVEAL
-           ========================================================================== */
-        .step1-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 32px;
-            width: 100%;
-            padding: 40px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 15px 35px rgba(255, 138, 174, 0.25);
-            backdrop-filter: blur(8px);
-        }
-
-        .badge-pill {
-            background: #ffe3ee;
-            color: #d84374;
-            font-weight: 800;
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 1rem;
-            margin-bottom: 30px;
-            letter-spacing: 0.5px;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8);
-        }
-
-        .heart-qr-wrapper {
-            position: relative;
-            width: 220px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .heart-qr-wrapper:active {
-            transform: scale(0.92);
-        }
-
-        .heart-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            color: #ff527b;
-            filter: drop-shadow(0 10px 20px rgba(255, 82, 123, 0.3));
-        }
-
-        .qr-pattern {
-            position: relative;
-            z-index: 2;
-            width: 90px;
-            height: 90px;
-            margin-top: 15px;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 4px;
-            padding: 8px;
+        .card {
             background: white;
-            border-radius: 12px;
-        }
-
-        .qr-pixel {
-            background: #2b2b2b;
-            border-radius: 2px;
-        }
-
-        .qr-pixel.alt { background: #ff527b; }
-
-        .tap-text {
-            margin-top: 35px;
-            font-weight: 700;
-            color: #8c5a6b;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            animation: pulseText 1.8s infinite;
-        }
-
-        @keyframes pulseText {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-
-        /* Opening Animation State */
-        .opening-anim {
-            animation: openingScale 0.6s forwards ease-in-out;
-        }
-
-        @keyframes openingScale {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.8); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 0; }
-        }
-
-        /* ==========================================================================
-           STEP 2: WELCOME SCREEN
-           ========================================================================== */
-        .main-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 32px;
-            width: 100%;
-            padding: 28px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            box-shadow: 0 15px 35px rgba(255, 138, 174, 0.25);
-            position: relative;
-        }
-
-        .illustration-box {
-            position: relative;
+            max-width: 380px;
             width: 100%;
-            max-width: 240px;
-            height: 180px;
-            margin-bottom: 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #fff0f5;
         }
 
-        .illustration-box svg {
-            width: 140px;
-            height: 140px;
-        }
-
-        .overlay-banner {
-            position: absolute;
-            bottom: 12px;
-            background: rgba(0, 0, 0, 0.65);
-            color: #ffffff;
+        .tag {
+            background-color: #ffe4e6;
+            color: #e11d48;
             padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            backdrop-filter: blur(4px);
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
-        .heading-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #3d232e;
-            margin-bottom: 8px;
-        }
-
-        .subtext {
-            font-size: 0.95rem;
-            color: #7d5966;
-            font-weight: 600;
-            margin-bottom: 28px;
-        }
-
-        .btn-pink {
-            background: linear-gradient(135deg, #ff6584 0%, #ff4365 100%);
-            color: #ffffff;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 800;
+        .heart-icon {
+            font-size: 80px;
+            margin: 15px 0;
+            display: block;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 67, 101, 0.35);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            width: 100%;
+            animation: pulse 1.5s infinite;
         }
 
-        .btn-pink:active {
-            transform: scale(0.96);
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        /* ==========================================================================
-           STEP 3: INTERACTIVE SLIDE DECK
-           ========================================================================== */
-        .slide-container {
-            width: 100%;
-            min-height: 280px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .slide-content {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            animation: fadeInSlide 0.4s ease forwards;
-        }
-
-        .slide-content.active-slide {
-            display: flex;
-        }
-
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message-box {
-            background: #fff5f8;
-            border: 2px dashed #ffb3c6;
-            border-radius: 18px;
-            padding: 16px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #4a2e38;
-            font-weight: 600;
+        .tap-text {
+            color: #be123c;
+            font-size: 20px;
+            font-weight: bold;
             margin-top: 15px;
-            width: 100%;
-        }
-
-        .deck-nav {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 25px;
-            gap: 12px;
-        }
-
-        .btn-nav {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 20px;
-            border: none;
-            font-weight: 800;
-            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
-        .btn-back {
-            background: #f0e2e7;
-            color: #6b4d57;
+        .content-section {
+            display: none;
         }
 
-        .btn-next {
-            background: #ff527b;
-            color: #ffffff;
-            box-shadow: 0 6px 16px rgba(255, 82, 123, 0.3);
+        .content-section h1 {
+            color: #e11d48;
+            font-size: 24px;
+            margin-bottom: 12px;
         }
 
-        .btn-nav:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            box-shadow: none;
+        .content-section p {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* ==========================================================================
-           STEP 4: SEALED ENVELOPE REVEAL
-           ========================================================================== */
-        .envelope-container {
-            position: relative;
-            width: 220px;
-            height: 150px;
-            background: #ff6b8b;
-            border-radius: 16px;
-            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.35);
-            cursor: pointer;
+        .btn-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease;
+            gap: 15px;
+            position: relative;
+            min-height: 50px;
+            margin-top: 15px;
         }
 
-        .envelope-container:active {
-            transform: scale(0.95);
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            width: 0;
-            height: 0;
-            border-left: 110px solid transparent;
-            border-right: 110px solid transparent;
-            border-top: 80px solid #e0486a;
-            transform-origin: top;
-            transition: transform 0.5s ease;
-            z-index: 3;
+        .yes-btn {
+            background-color: #22c55e;
+            color: white;
         }
 
-        .envelope-pocket {
-            position: absolute;
-            bottom: 0;
-            width: 0;
-            height: 0;
-            border-left: 110px solid #ff7b98;
-            border-right: 110px solid #ff7b98;
-            border-bottom: 75px solid #ff8ba4;
-            border-radius: 0 0 16px 16px;
-            z-index: 2;
-        }
-
-        .envelope-heart-seal {
-            position: absolute;
-            z-index: 4;
-            font-size: 2rem;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
-        }
-
-        .click-open-text {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #d6335c;
-            letter-spacing: 1px;
-            animation: bounceText 1.5s infinite;
-        }
-
-        @keyframes bounceText {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        /* ==========================================================================
-           STEP 5: FINAL HANDWRITTEN LETTER
-           ========================================================================== */
-        .paper-card {
-            background: #fffdf5;
-            background-image: radial-gradient(#ece3cb 1px, transparent 0);
-            background-size: 20px 20px;
-            border-radius: 24px;
-            width: 100%;
-            max-height: 85vh;
-            padding: 28px 20px 20px 20px;
-            box-shadow: 0 15px 35px rgba(80, 50, 60, 0.15);
-            border: 1px solid #ebdcb9;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .no-btn {
+            background-color: #ef4444;
+            color: white;
             position: relative;
         }
 
-        .paper-header {
-            font-size: 0.85rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: #b57c8d;
-            margin-bottom: 12px;
-            text-align: center;
+        .final-screen {
+            display: none;
         }
 
-        .paper-salutation {
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            color: #d6335c;
-            font-weight: 700;
-            align-self: flex-start;
+        .final-screen h2 {
+            color: #22c55e;
+            font-size: 22px;
             margin-bottom: 10px;
-        }
-
-        .letter-illustration {
-            width: 80px;
-            height: 80px;
-            margin: 8px 0 14px 0;
-        }
-
-        .handwritten-content {
-            font-family: 'Caveat', cursive;
-            font-size: 1.45rem;
-            line-height: 1.4;
-            color: #362229;
-            font-weight: 600;
-            text-align: left;
-            width: 100%;
-        }
-
-        .handwritten-content p {
-            margin-bottom: 12px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Floating Hearts -->
-    <div id="particles-container"></div>
+    <div class="card">
+        <!-- Cover View -->
+        <div id="coverSection" onclick="openEnvelope()">
+            <div class="tag">Bestuuu</div>
+            <div class="heart-icon">💖</div>
+            <div class="tap-text">Tap anywhere to open 💖</div>
+        </div>
 
-    <!-- Main Mobile Frame Container -->
-    <div class="app-frame">
-
-        <!-- ==========================================
-             STEP 1: HEART QR REVEAL
-             ========================================== -->
-        <div class="view-step active" id="step1">
-            <div class="step1-card">
-                <div class="badge-pill">Bestuuu</div>
-                
-                <div class="heart-qr-wrapper" id="heartQrBtn" onclick="goToStep2()">
-                    <!-- Heart Shape SVG Background -->
-                    <svg class="heart-bg" viewBox="0 0 32 29" fill="currentColor">
-                        <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,20.6,16,20.6s16-11.2,16-20.6C32,3.8,28.2,0,23.6,0z"/>
-                    </svg>
-
-                    <!-- Decorative Simulated QR Pattern -->
-                    <div class="qr-pattern">
-                        <div class="qr-pixel"></div><div class="qr-pixel alt"></div><div class="qr-pixel"></div><div class="qr-pixel"></div><div class="qr-pixel alt"></div>
-                        <div class="qr-pixel alt"></div><div class="qr-pixel"></div><div class="qr-pixel alt"></div><div class="qr-pixel"></div><div class="qr-pixel"></div>
-                        <div class="qr-pixel"></div><div class="qr-pixel alt"></div><div class="qr-pixel"></div><div class="qr-pixel alt"></div><div class="qr-pixel"></div>
-                        <div class="qr-pixel alt"></div><div class="qr-pixel"></div><div class="qr-pixel"></div><div class="qr-pixel"></div><div class="qr-pixel alt"></div>
-                        <div class="qr-pixel"></div><div class="qr-pixel alt"></div><div class="qr-pixel alt"></div><div class="qr-pixel"></div><div class="qr-pixel"></div>
-                    </div>
-                </div>
-
-                <div class="tap-text">Tap to open 💖</div>
+        <!-- Apology View -->
+        <div id="apologySection" class="content-section">
+            <div class="tag">I'm Sorry! 🥺</div>
+            <h1>Please Forgive Me?</h1>
+            <p>I really value our friendship and I'm truly sorry for messing up. Can we make up?</p>
+            <div class="btn-container">
+                <button class="yes-btn" onclick="forgive()">Yes ❤️</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No 💔</button>
             </div>
         </div>
 
-        <!-- ==========================================
-             STEP 2: WELCOME SCREEN
-             ========================================== -->
-        <div class="view-step" id="step2">
-            <div class="main-card">
-                <div class="illustration-box">
-                    <!-- Sad Kitten Vector Illustration -->
-                    <svg viewBox="0 0 100 100" fill="none">
-                        <circle cx="50" cy="50" r="40" fill="#FFE4EC"/>
-                        <!-- Kitten Ears -->
-                        <path d="M25 35L15 15L38 25Z" fill="#FFA6c1"/>
-                        <path d="M75 35L85 15L62 25Z" fill="#FFA6c1"/>
-                        <!-- Head -->
-                        <ellipse cx="50" cy="52" rx="28" ry="22" fill="#FFFFFF"/>
-                        <!-- Sad Eyes -->
-                        <ellipse cx="38" cy="48" rx="3" ry="4" fill="#3D232E"/>
-                        <ellipse cx="62" cy="48" rx="3" ry="4" fill="#3D232E"/>
-                        <!-- Tear Drops -->
-                        <path d="M35 55C35 57 33 59 33 59C33 59 31 57 31 55C31 53.8 31.8 53 33 53C34.2 53 35 53.8 35 55Z" fill="#4AC2FF"/>
-                        <!-- Mouth -->
-                        <path d="M46 58C48 56 52 56 54 58" stroke="#3D232E" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <div class="overlay-banner">sorry, Please forgive me. 🥺</div>
-                </div>
-
-                <h2 class="heading-title">I Messed Up, Bestuuu 🥺</h2>
-                <p class="subtext">But I'm ready to make it right.</p>
-
-                <button class="btn-pink" onclick="goToStep3()">Listen to my heart 💓</button>
-            </div>
+        <!-- Success View -->
+        <div id="successSection" class="final-screen">
+            <div class="heart-icon">🎉</div>
+            <h2>Yay! Thank You!</h2>
+            <p>Best friends forever! 🤗✨</p>
         </div>
+    </div>
 
-        <!-- ==========================================
-             STEP 3: INTERACTIVE SLIDE DECK
-             ========================================== -->
-        <div class="view-step" id="step3">
-            <div class="main-card">
-                <div class="slide-container">
-                    
-                    <!-- Slide 1 -->
-                    <div class="slide-content active-slide" id="slide0">
-                        <div class="illustration-box">
-                            <svg viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="38" fill="#FFF0F5"/>
-                                <!-- Bowing Bear -->
-                                <circle cx="50" cy="55" r="22" fill="#E8B48F"/>
-                                <circle cx="34" cy="38" r="8" fill="#E8B48F"/>
-                                <circle cx="66" cy="38" r="8" fill="#E8B48F"/>
-                                <ellipse cx="50" cy="60" rx="6" ry="4" fill="#D2966E"/>
-                                <!-- Closed eyes bowing -->
-                                <path d="M42 52C44 54 46 54 46 52" stroke="#4A2E38" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M54 52C56 54 58 54 58 52" stroke="#4A2E38" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3 class="heading-title" style="font-size:1.35rem;">I Know I Hurt You</h3>
-                        <div class="message-box">
-                            Okay twin... I know I made you feel sad yesterday, and I want to apologise for it (Maaaaaaf krdow ww yawwwr 🥺 puppy eyes)
-                        </div>
-                    </div>
+    <script>
+        function openEnvelope() {
+            document.getElementById('coverSection').style.display = 'none';
+            document.getElementById('apologySection').style.display = 'block';
+        }
 
-                    <!-- Slide 2 -->
-                    <div class="slide-content" id="slide1">
-                        <div class="illustration-box">
-                            <svg viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="38" fill="#FFE6EE"/>
-                                <!-- Hugging Bunny -->
-                                <ellipse cx="50" cy="55" rx="20" ry="22" fill="#FFFFFF"/>
-                                <path d="M40 38C36 20 26 22 34 38" fill="#FFFFFF" stroke="#FFB3C6" stroke-width="2"/>
-                                <path d="M60 38C64 20 74 22 66 38" fill=
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.max(20, x) + 'px';
+            noBtn.style.top = Math.max(20, y) + 'px';
+        }
+
+        function forgive() {
+            document.getElementById('apologySection').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
