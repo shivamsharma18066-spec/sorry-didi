@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -163,15 +163,16 @@
             font-weight: 300;
         }
 
-        /* GIF styling inside messages */
-        .msg-gif {
-            width: 120px;
+        /* Media styling inside messages */
+        .msg-media {
+            width: 130px;
             max-width: 80%;
             height: auto;
             border-radius: 12px;
             margin-top: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             display: inline-block;
+            outline: none;
         }
 
         /* Envelope Section */
@@ -262,8 +263,8 @@
             font-size: 16px;
         }
 
-        .note-gif-top {
-            width: 120px;
+        .note-media-top {
+            width: 130px;
             max-width: 80%;
             height: auto;
             border-radius: 12px;
@@ -272,8 +273,8 @@
             display: inline-block;
         }
 
-        .note-gif-bottom {
-            width: 130px;
+        .note-media-bottom {
+            width: 140px;
             max-width: 80%;
             height: auto;
             border-radius: 12px;
@@ -338,7 +339,9 @@
                 <div class="msg-content">
                     <div class="msg-title">I messed up, bestuuu 🥺</div>
                     <div class="msg-text">I really didn't mean to make u feel ignored. I should've just asked u what was wrong instead of assuming.</div>
-                    <img src="https://c.tenor.com/vdrZBTXV3HzAAAAC/tenor.gif" alt="GIF 1" class="msg-gif">
+                    <video class="msg-media" autoplay loop muted playsinline>
+                        <source src="gif1.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 
@@ -348,7 +351,9 @@
                 <div class="msg-content">
                     <div class="msg-title">I never wanted this 🥹</div>
                     <div class="msg-text">I thought u needed some space, so I gave it to u… but I realise now that I should've checked on u instead.</div>
-                    <img src="https://c.tenor.com/dfubgEbNZU4AAAAC/tenor.gif" alt="GIF 2" class="msg-gif">
+                    <video class="msg-media" autoplay loop muted playsinline>
+                        <source src="gif2.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 
@@ -358,7 +363,7 @@
                 <div class="msg-content">
                     <div class="msg-title">Please forgive me 🫶🏻</div>
                     <div class="msg-text">U mean way too much to me, twin. I never want u to feel unimportant because of me.</div>
-                    <img src="https://c.tenor.com/bSna0DJ80yvAAAAC/tenor.gif" alt="GIF 3" class="msg-gif">
+                    <img src="gif3.gif" alt="GIF 3" class="msg-media">
                 </div>
             </div>
 
@@ -382,19 +387,23 @@
         <!-- Final Handwritten Paper Note -->
         <div class="final-note-container" id="finalNote">
             <div class="paper-card">
-                <!-- Top Center GIF -->
-                <img src="https://c.tenor.com/9sreAAAAC/tenor.gif" alt="Note Top GIF" class="note-gif-top">
+                <!-- Top Center Media -->
+                <video class="note-media-top" autoplay loop muted playsinline>
+                    <source src="gif4.mp4" type="video/mp4">
+                </video>
                 
-                <div class="handwritten-text">Good morning, devi g ☀️🛐
+                <div class="handwritten-text">Good morning devi g☀️🛐
 
 Before anything else, I want to say I'm really sorry, my bestuuu. 🥺 I genuinely never wanted to upset u or make u feel like I was ignoring u.
-Yesterday when u were replying late n ur replies felt off n dry, I honestly thought u are feeling sad or weren't in the mood to talk.
+Yesterday when u were replying late n ur replies felt off n dry, I honestly thought u were feeling sad or weren't in the mood to talk.
 I thought maybe u needed some time n space, so instead of bothering u, I decided to give u that space. I now realise that I should've simply asked u if u were okay instead of assuming it, n I genuinely apologise for it.
 U mean way too much to me, twin 🫶🏻💞
 The last thing I ever want is for u to feel ignored or unimportant because of me 🥹</div>
 
-                <!-- Bottom Center GIF -->
-                <img src="https://c.tenor.com/dJeguxN8K9vAAAAC/tenor.gif" alt="Note Bottom GIF" class="note-gif-bottom">
+                <!-- Bottom Center Media -->
+                <video class="note-media-bottom" autoplay loop muted playsinline>
+                    <source src="gif5.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
 
@@ -415,6 +424,12 @@ The last thing I ever want is for u to feel ignored or unimportant because of me
                 card.classList.remove('closed');
                 card.classList.add('open');
                 openedCards.add(cardNumber);
+                
+                // Ensure media inside the card starts playing when opened
+                const video = card.querySelector('video');
+                if (video) {
+                    video.play().catch(() => {});
+                }
             }
 
             // Check if all 3 cards are revealed
@@ -435,6 +450,11 @@ The last thing I ever want is for u to feel ignored or unimportant because of me
             setTimeout(() => {
                 envelopeSec.style.display = 'none';
                 finalNote.classList.add('show');
+                
+                // Ensure note videos start playing
+                const noteVideos = finalNote.querySelectorAll('video');
+                noteVideos.forEach(v => v.play().catch(() => {}));
+
                 finalNote.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 400);
         }
@@ -483,4 +503,4 @@ The last thing I ever want is for u to feel ignored or unimportant because of me
         animateParticles();
     </script>
 </body>
-</html>
+    </html>   
